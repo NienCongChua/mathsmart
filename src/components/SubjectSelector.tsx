@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { 
-  Calculator, ChevronDown, Function, Sigma, 
+  Calculator, ChevronDown, FunctionSquare, Sigma, 
   Triangle, LineChart
 } from 'lucide-react';
 
@@ -16,7 +16,7 @@ const SubjectSelector: React.FC<SubjectSelectorProps> = ({
 }) => {
   const subjects = [
     { id: 'algebra', label: 'Algebra', icon: <Calculator size={18} /> },
-    { id: 'calculus', label: 'Calculus', icon: <Function size={18} /> },
+    { id: 'calculus', label: 'Calculus', icon: <FunctionSquare size={18} /> },
     { id: 'trigonometry', label: 'Trigonometry', icon: <Triangle size={18} /> },
     { id: 'statistics', label: 'Statistics', icon: <Sigma size={18} /> },
     { id: 'graphing', label: 'Graphing', icon: <LineChart size={18} /> },
