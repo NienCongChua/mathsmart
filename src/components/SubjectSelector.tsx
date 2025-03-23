@@ -1,39 +1,40 @@
 
 import React from 'react';
-import { cn } from '@/lib/utils';
-
-type Subject = 'algebra' | 'calculus' | 'trigonometry' | 'statistics';
+import { 
+  Calculator, ChevronDown, Function, Sigma, 
+  Triangle, LineChart
+} from 'lucide-react';
 
 interface SubjectSelectorProps {
-  selectedSubject: Subject;
-  onSelectSubject: (subject: Subject) => void;
+  selectedSubject: string;
+  onSelectSubject: (subject: string) => void;
 }
 
 const SubjectSelector: React.FC<SubjectSelectorProps> = ({
   selectedSubject,
-  onSelectSubject,
+  onSelectSubject
 }) => {
-  const subjects: { id: Subject; label: string }[] = [
-    { id: 'algebra', label: 'Algebra' },
-    { id: 'calculus', label: 'Calculus' },
-    { id: 'trigonometry', label: 'Trigonometry' },
-    { id: 'statistics', label: 'Statistics' },
+  const subjects = [
+    { id: 'algebra', label: 'Algebra', icon: <Calculator size={18} /> },
+    { id: 'calculus', label: 'Calculus', icon: <Function size={18} /> },
+    { id: 'trigonometry', label: 'Trigonometry', icon: <Triangle size={18} /> },
+    { id: 'statistics', label: 'Statistics', icon: <Sigma size={18} /> },
+    { id: 'graphing', label: 'Graphing', icon: <LineChart size={18} /> },
   ];
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3 mb-6 animate-slide-down">
-      {subjects.map((subject, index) => (
+    <div className="flex flex-wrap justify-center gap-2 mb-8 animate-fade-in">
+      {subjects.map((subject) => (
         <button
           key={subject.id}
-          className={cn(
-            "subject-button",
-            selectedSubject === subject.id && "active",
-            `delay-${index * 100}`
-          )}
+          className={`subject-button flex items-center gap-2 ${
+            selectedSubject === subject.id ? 'active' : ''
+          }`}
           onClick={() => onSelectSubject(subject.id)}
-          aria-pressed={selectedSubject === subject.id}
         >
-          {subject.label}
+          {subject.icon}
+          <span>{subject.label}</span>
+          {selectedSubject === subject.id && <ChevronDown size={14} />}
         </button>
       ))}
     </div>

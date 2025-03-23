@@ -5,7 +5,7 @@ import MathInput from './MathInput';
 import StepByStepSolution from './StepByStepSolution';
 import { solveEquation, isValidMathExpression } from '@/lib/mathUtils';
 
-type Subject = 'algebra' | 'calculus' | 'trigonometry' | 'statistics';
+type Subject = 'algebra' | 'calculus' | 'trigonometry' | 'statistics' | 'graphing';
 
 const MathSolver: React.FC = () => {
   const [mathExpression, setMathExpression] = useState('');
@@ -32,11 +32,17 @@ const MathSolver: React.FC = () => {
     }, 300);
   };
 
+  const handleSubjectChange = (subject: string) => {
+    setSelectedSubject(subject as Subject);
+    // Clear current solution when changing subjects
+    setSolution(null);
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto px-4">
       <SubjectSelector
         selectedSubject={selectedSubject}
-        onSelectSubject={setSelectedSubject}
+        onSelectSubject={handleSubjectChange}
       />
       
       <MathInput
@@ -47,7 +53,7 @@ const MathSolver: React.FC = () => {
         isValid={isValid}
       />
       
-      {solution && (
+      {solution && selectedSubject !== 'graphing' && (
         <div id="solution-container" className="mt-12">
           <StepByStepSolution 
             steps={solution.steps} 
